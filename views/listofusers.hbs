@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Table</title>
+    <style>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</style>
+</head>
+<body>
+    <h1>List of users:</h1> 
+        <form action="/edituser" method="POST">    
+            <input type="text" id="name" name="name" class="form-control" placeholder="name" size="40"><br>
+            <input type="text" id="password"  name="password" class="form-control" placeholder="password" size="40"><br>
+            <input id="indexValue" type="hidden" value="" name="selectedrow">
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+       <h1>Select row to update</h1>
+    <table id="aTable">
+        <tbody>
+        {{#each createduser}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.password}}</td>
+              
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    <script>
+        onload = function() {
+            
+            var rows = document.getElementById('aTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            for (i = 0; i < rows.length; i++) {
+                rows[i].onclick = function() {
+                    var selectedRow = this.rowIndex;
+                    var elementsValues = this.children;
+                    document.getElementById('name').value = elementsValues[0].innerHTML;
+                    document.getElementById('password').value = elementsValues[1].innerHTML;
+                    document.getElementById('indexValue').value = selectedRow;
+                    
+                }
+            }
+        }
+
+     
+
+        
+    </script>
+</body>
+</html>
